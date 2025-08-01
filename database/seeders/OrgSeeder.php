@@ -22,7 +22,9 @@ class OrgSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->names as $name) {
-            Org::create(['name' => $name, 'building_id' => 1]);
+            if (!Org::where('name', $name)->exists()) {
+                Org::create(['name' => $name, 'building_id' => 1]);
+            }
         }
     }
 }

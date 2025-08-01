@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             OrgSeeder::class,
+            PhoneSeeder::class,
         ]);
     }
 }
