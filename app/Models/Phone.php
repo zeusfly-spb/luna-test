@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static create(array $array)
@@ -10,5 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Phone extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function org(): BelongsTo
+    {
+        return $this->belongsTo(Org::class);
+    }
 }

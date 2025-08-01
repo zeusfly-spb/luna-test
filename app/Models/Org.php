@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static create(array $array)
@@ -12,4 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 class Org extends Model
 {
     protected $guarded = [];
+
+    public function phones(): HasMany
+    {
+        return $this->hasMany(Phone::class);
+    }
 }
