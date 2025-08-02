@@ -13,4 +13,15 @@ class OrgController extends Controller
     {
         return response()->json(OrgResource::collection(Org::all()));
     }
+
+    public function show(string $id): JsonResponse
+    {
+        return response()->json(new OrgResource(Org::with('actions')->find($id)));
+    }
+
+    public function by_name(Request $request): JsonResponse
+    {
+        $name = $request->get('name');
+        return response()->json(OrgResource::collection($orgs = Org::where('name', 'like', '%' . $name . '%')->get()));
+    }
 }

@@ -60,38 +60,38 @@ class ActionSeeder extends Seeder
         ['name' => 'Спальные гарнитуры', 'parent' => 'Гарнитуры'],
         ['name' => 'Детские гарнитуры', 'parent' => 'Гарнитуры'],
     ];
-    protected array $org_ids;
+    protected $org_ids;
 
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->org_ids = Org::get()->pluck('id')->toArray();
+        $this->org_ids = Org::get()->pluck('id');
         foreach ($this->primary_actions as $action) {
             if (!Action::where('name', $action['name'])->exists()) {
-                Action::create([
+                $action = Action::create([
                     'name' => $action['name'],
-                    'org_id' => $this->org_ids[array_rand($this->org_ids)],
                 ]);
+                $action->orgs()->attach($this->org_ids->random(rand(1, 3)));
             }
         }
         foreach ($this->secondary_actions as $action) {
             if (!Action::where('name', $action['name'])->exists()) {
-                Action::create([
+                $action = Action::create([
                     'name' => $action['name'],
                     'parent_id' => Action::where('name', $action['parent'])->first()->id,
-                    'org_id' => $this->org_ids[array_rand($this->org_ids)],
                 ]);
+                $action->orgs()->attach($this->org_ids->random(rand(1, 3)));
             }
         }
         foreach ($this->tertiary_actions as $action) {
             if (!Action::where('name', $action['name'])->exists()) {
-                Action::create([
+                $action = Action::create([
                     'name' => $action['name'],
                     'parent_id' => Action::where('name', $action['parent'])->first()->id,
-                    'org_id' => $this->org_ids[array_rand($this->org_ids)],
                 ]);
+                $action->orgs()->attach($this->org_ids->random(rand(1, 3)));
             }
         }
     }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/orgs', [OrgController::class, 'index']);
+Route::get('/orgs/{id}', [OrgController::class, 'show']);
+Route::post('/orgs/by_name', [OrgController::class, 'by_name']);
 
 Route::get('/buildings', [BuildingController::class, 'index']);
 Route::get('/buildings/orgs/{id}', [BuildingController::class, 'orgs']);

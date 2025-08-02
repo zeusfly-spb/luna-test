@@ -17,6 +17,8 @@ class ActionController extends Controller
 
     public function orgs(string $id): JsonResponse
     {
-        return response()->json(Action::find($id)->orgs);
+        $action = Action::with('children')->find($id);
+        $orgs = $action->descendantOrgs();
+        return response()->json(OrgResource::collection($orgs));
     }
 }

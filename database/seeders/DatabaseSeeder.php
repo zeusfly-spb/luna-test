@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             BuildingSeeder::class,
             OrgSeeder::class,
             PhoneSeeder::class,
+            ActionSeeder::class,
         ]);
     }
 }
