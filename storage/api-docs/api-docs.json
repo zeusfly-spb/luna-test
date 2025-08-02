@@ -1,0 +1,299 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Luna-Test API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/actions": {
+            "get": {
+                "tags": [
+                    "Деятельность"
+                ],
+                "summary": "Получить список сфер деятельности",
+                "operationId": "a9d7c561614fd277a97feeccca3fdafb",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ"
+                    }
+                }
+            }
+        },
+        "/api/actions/orgs/{id}": {
+            "get": {
+                "tags": [
+                    "Деятельность"
+                ],
+                "summary": "Получить организации по ID деятельности",
+                "operationId": "67ac9ea117efe14588834eb73ccc353a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID деятельности",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация об организациях"
+                    },
+                    "404": {
+                        "description": "Организации деятельности не найдены"
+                    }
+                }
+            }
+        },
+        "/api/buildings": {
+            "get": {
+                "tags": [
+                    "Здания"
+                ],
+                "summary": "Получить список зданий",
+                "operationId": "704d1f7897ed7a3b8d29dacea66823ad",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ"
+                    }
+                }
+            }
+        },
+        "/api/buildings/orgs/{id}": {
+            "get": {
+                "tags": [
+                    "Здания"
+                ],
+                "summary": "Получить организации по ID здания",
+                "operationId": "33f5ff4c65a21e8da183a4774ddd1581",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID здания",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация об организациях"
+                    },
+                    "404": {
+                        "description": "Организации здания не найдены"
+                    }
+                }
+            }
+        },
+        "/api/buildings/nearby": {
+            "post": {
+                "tags": [
+                    "Здания"
+                ],
+                "summary": "Найти здания в заданном радиусе",
+                "operationId": "1993c9c753617bfc72075ff193f8f7d1",
+                "requestBody": {
+                    "description": "Координаты и радиус поиска",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "lat",
+                                    "lng"
+                                ],
+                                "properties": {
+                                    "lat": {
+                                        "description": "Широта (latitude)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 55.7498
+                                    },
+                                    "lng": {
+                                        "description": "Долгота (longitude)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 37.5377
+                                    },
+                                    "radius": {
+                                        "description": "Радиус в метрах (по умолчанию 1000)",
+                                        "type": "integer",
+                                        "example": 1000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список зданий поблизости"
+                    },
+                    "422": {
+                        "description": "Некорректные координаты или формат запроса"
+                    }
+                }
+            }
+        },
+        "/api/buildings/nearby/orgs": {
+            "post": {
+                "tags": [
+                    "Здания"
+                ],
+                "summary": "Найти организации в зданиях в заданном радиусе",
+                "operationId": "6a1ae985316ed1c466a9ce52f66bd0ab",
+                "requestBody": {
+                    "description": "Координаты и радиус поиска",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "lat",
+                                    "lng"
+                                ],
+                                "properties": {
+                                    "lat": {
+                                        "description": "Широта (latitude)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 55.7498
+                                    },
+                                    "lng": {
+                                        "description": "Долгота (longitude)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 37.5377
+                                    },
+                                    "radius": {
+                                        "description": "Радиус в метрах (по умолчанию 1000)",
+                                        "type": "integer",
+                                        "example": 1000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список организаций в зданиях поблизости"
+                    },
+                    "422": {
+                        "description": "Некорректные координаты или формат запроса"
+                    }
+                }
+            }
+        },
+        "/api/orgs": {
+            "get": {
+                "tags": [
+                    "Организации"
+                ],
+                "summary": "Получить список организаций",
+                "operationId": "a600a0aff11284f4090a90c74de14bf2",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ"
+                    }
+                }
+            }
+        },
+        "/api/orgs/{id}": {
+            "get": {
+                "tags": [
+                    "Организации"
+                ],
+                "summary": "Получить организацию по ID",
+                "operationId": "857f6b866f483c4e86ac80ba2e6c8d38",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID организации",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация об организации"
+                    },
+                    "404": {
+                        "description": "Организация не найдена"
+                    }
+                }
+            }
+        },
+        "/api/orgs/by_name": {
+            "post": {
+                "tags": [
+                    "Организации"
+                ],
+                "summary": "Найти организации по имени",
+                "operationId": "5906ab72af0901a193410f1ca573a940",
+                "requestBody": {
+                    "description": "Имя или часть имени организации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Рога и Копыта"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список найденных организаций"
+                    },
+                    "422": {
+                        "description": "Неверный формат запроса"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "name": "x-api-key",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Деятельность"
+        },
+        {
+            "name": "Здания"
+        },
+        {
+            "name": "Организации"
+        }
+    ],
+    "security": [
+        {
+            "ApiKeyAuth": []
+        }
+    ]
+}
